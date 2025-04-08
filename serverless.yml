@@ -4,10 +4,13 @@ org: jaiminxp
 app: serverless-nodejs-api
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: serverless-nodejs-api
+useDotenv: true
 
 provider:
   name: aws
   runtime: nodejs20.x
+  environment:
+    DATABASE_URL: ${env:DATABASE_URL, "fallback_value"}
 
 functions:
   api:
@@ -17,3 +20,4 @@ functions:
 
 plugins:
   - serverless-offline
+  - serverless-dotenv-plugin
