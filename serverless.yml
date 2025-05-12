@@ -11,6 +11,18 @@ provider:
   runtime: nodejs20.x
   environment:
     DATABASE_URL: ${env:DATABASE_URL, "fallback_value"}
+  iam:
+    role:
+      name: serverless-project-ssm-role
+      statements:
+        - Effect: Allow
+          Resource: "*"
+          Action:
+            - ssm:GetParameter
+            - ssm:GetParameters
+            - ssm:GetParametersByPath
+            - ssm:DescribeParameters
+            - ssm:GetParameterHistory
 
 functions:
   api:
@@ -23,6 +35,7 @@ custom:
     exclude:
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
+      - DATABASE_URL
 
 plugins:
   - serverless-offline
