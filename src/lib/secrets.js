@@ -10,7 +10,6 @@ async function getDatabaseUrl() {
     
     const paramStoreData = {
         Name: DATABASE_URL_SSM_PARAM,
-        WithDecryption: true,
     }
 
     const command = new GetParameterCommand(paramStoreData);
