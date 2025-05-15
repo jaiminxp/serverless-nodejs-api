@@ -7,7 +7,8 @@
     "info": "serverless info --stage prod --region us-east-1",
     "deploy": "serverless deploy --stage prod --region us-east-1",
     "remove": "serverless remove --stage prod --region us-east-1",
-    "generate": "drizzle-kit generate --config=drizzle.config.js"
+    "generate": "drizzle-kit generate --config=drizzle.config.js",
+    "migrate": "node src/cli/migrator.js"
   },
   "dependencies": {
     "@aws-sdk/client-ssm": "^3.808.0",
@@ -17,6 +18,7 @@
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {
+    "dotenv": "^16.5.0",
     "drizzle-kit": "^0.30.6",
     "serverless-dotenv-plugin": "^6.0.0",
     "serverless-offline": "^14.4.0"
