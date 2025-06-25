@@ -2,6 +2,7 @@ const serverless = require("serverless-http");
 const express = require("express");
 const { getDbClient } = require("./db/clients");
 const crud = require("./db/crud");
+const validtors = require("./db/validators");
 
 const app = express();
 
@@ -42,8 +43,20 @@ app.get("/leads/:id", async (req, res, next) => {
 });
 
 app.post("/leads", async (req, res, next) => {
-  const data = await req.body
-  const result = await crud.newLead(data)
+  const body = await req.body
+  const { data, hasError, message } = validtors.validateLead(body)
+
+  if (hasError) {
+    return res.status(400).json({
+      message
+    });  
+  } else if(hasError === undefined) {
+    return res.status(500).json({
+      message: "Server Error"
+    });  
+  }
+
+  const result = await crud.newLead(body)
 
   return res.status(200).json({
     message: "Lead created",
