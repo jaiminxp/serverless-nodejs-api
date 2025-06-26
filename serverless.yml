@@ -9,8 +9,10 @@ useDotenv: true
 provider:
   name: aws
   runtime: nodejs20.x
+  timeout: 10
   environment:
     DATABASE_URL: ${env:DATABASE_URL, "fallback_value"}
+    STAGE: ${env:STAGE, "prod"}
   iam:
     role:
       name: serverless-project-ssm-role
