@@ -29,13 +29,13 @@ jobs:
             - name: Install neonctl
               run: npm install -g neonctl
             - name: Delete Previous Branch
-              run: neonctl branches delete dev --api-key ${{ env.API_KEY }} 
+              run: neonctl branches delete --name dev --api-key ${{ env.API_KEY }} 
               continue-on-error: true
             - name: Create Branched Database
-              run: neonctl branches create dev --api-key ${{ env.API_KEY }}
+              run: neonctl branches create --name dev --api-key ${{ env.API_KEY }}
             - name: Branch Connection String in Parameter Store
               run: |
-                  export DB_URL=$(neonctl branches connection-string dev --api-key ${{ env.API_KEY }} )
+                  export DB_URL=$(neonctl connection-string --branch dev --api-key ${{ env.API_KEY }} )
                   node src/cli/putSecrets.js dev $DB_URL
             - name: Branch Info
               run: |
