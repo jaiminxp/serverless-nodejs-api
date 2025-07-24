@@ -8,7 +8,8 @@
     "deploy": "serverless deploy --stage prod --region us-east-1",
     "remove": "serverless remove --stage prod --region us-east-1",
     "generate": "drizzle-kit generate --config=drizzle.config.js",
-    "migrate": "node src/cli/migrator.js"
+    "migrate": "node src/cli/migrator.js",
+    "vercel-build": "echo 'hello'"
   },
   "dependencies": {
     "@aws-sdk/client-ssm": "^3.808.0",
